@@ -7,7 +7,7 @@ class DJ(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot = bot
 
-    
+    @commands.command(name="play", aliases=["p"], description="play musics")
     def play() -> None:
         pass
 
