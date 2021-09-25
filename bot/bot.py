@@ -4,7 +4,7 @@ from configs.config import ROOT_PATH, TOKEN, DEFAULT_PREFIX
 from bot.helpers import helpers as h
 from bot import cogs
 
-#Me chupan 3 pingos xd
+
 COGS = {
     "dj"
 }
