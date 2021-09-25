@@ -3,7 +3,7 @@ from discord.ext import commands
 from configs.config import TOKEN, DEFAULT_PREFIX
 from helpers import helpers as h
 
-
+#Me chupan 3 pingos xd
 COGS = {
     "dj"
 }
