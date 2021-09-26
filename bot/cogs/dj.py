@@ -8,5 +8,6 @@ class DJ(commands.Cog):
     async def play(self) -> None:
         pass
 
+
 def setup(bot):
     bot.add_cog(DJ(bot))
