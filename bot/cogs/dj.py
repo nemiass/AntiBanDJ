@@ -5,7 +5,7 @@ class DJ(commands.Cog):
         self.bot = bot
 
     @commands.command(name="play", aliases=["p"], description="play musics")
-    async def play() -> None:
+    async def play(self) -> None:
         pass
 
 def setup(bot):
