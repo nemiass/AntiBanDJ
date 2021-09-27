@@ -3,3 +3,6 @@
 __pycache__
 token.txt
 .idea
+ffmpeg
+config.py
+prefixes.json

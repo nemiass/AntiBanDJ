@@ -13,32 +13,34 @@ class WaifuDJ(commands.Bot):
 
     async def on_ready(self) -> None:
         await self.change_presence(
-            status=discord.Status.online,
-            activity=discord.Activity(type=discord.ActivityType.listening, name="Bad bunny")
+            status=discord.Status.idle,
+            activity=discord.Activity(type=discord.ActivityType.listening, name="bot versión beta")
         )
         print("The bot is online")
 
     async def on_guild_join(self, guild) -> None:
         """
         Carga el prefijo por defecto relacionado al ID del server en
-        donde el bot fue añadido
+        donde el bot fue añadido, se guarda en un json
         """
         prefixes = h.read_prefixes()
-        prefixes[str(guild.id)] = {"name_server": str(guild), "prefijo": DEFAULT_PREFIX}
+        prefixes[str(guild.id)] = {"server": str(guild), "prefijo": DEFAULT_PREFIX}
         h.save_prefixes(prefixes)
 
         channels = []
         for channel in guild.channels:
             if isinstance(channel, discord.channel.TextChannel):
-                if str(channel) == "general":
+                if "general" in str(channel):
                     channels.insert(0, channel)
                 else:
                     channels.append(channel)
 
         target_channel = None
         for channel in channels:
+            print(str(channel))
             if guild.me.permissions_in(channel).send_messages:
-                target_channel = channel; break
+                target_channel = channel
+                break
 
         if target_channel is None:
             return
@@ -47,15 +49,15 @@ class WaifuDJ(commands.Bot):
         # TODO: (refactorizar): crar una clase para trabajar los Embeds
         embed = discord.Embed(color=0xFE9AC9)
         embed.title = "Hola!!!"
-        embed.description = "Hola soy \"WaifuDJ\" y mi prefijo por defecto es `?`"
+        embed.description = "***\"Vive la vida no dejes que la vida te viva\"***, `prefijo:` `?`"
         embed.url = "https://www.youtube.com/watch?v=ublf6qfpuuo"
         embed.set_thumbnail(url='https://i.pinimg.com/originals/6b/8b/a1/6b8ba1cbea0b91298960d4c00faca009.jpg')
 
         embed.add_field(
             name="Guía:",
             value=(
-                "» `?setprefix <prefix>` => modificar prefijo (admin)\n"
-                "» `?help` => comandos disponibles (all)\n"
+                "» `?setprefix <prefix>` `>>>` modificar prefijo (admin)\n"
+                "» `?help` `>>>` comandos disponibles (all)\n"
             ),
             inline=False,
         )
@@ -73,6 +75,20 @@ class WaifuDJ(commands.Bot):
             return
         else:
             h.save_prefixes(prefixes)
+
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, commands.CommandNotFound):
+            pass
+        elif isinstance(error, commands.MissingPermissions):
+            await ctx.send(f"{ctx.author.name} tu rango es muy bajo para ejecutar este comando")
+        elif isinstance(error, commands.NoPrivateMessage):
+            embed = discord.Embed()
+            embed.set_image(url='https://i.ytimg.com/vi/ibpAeOTIYL0/mqdefault.jpg')
+            await ctx.send(embed=embed)
+        elif isinstance(error, commands.MissingRequiredArgument):
+            embed = discord.Embed(description="El comando requiere argumentos!!")
+            embed.set_image(url='https://i.ytimg.com/vi/ibpAeOTIYL0/mqdefault.jpg')
+            await ctx.send(embed=embed)
 
     def load_prefix(self, bot, message) -> None:
         """Cargar el prefijo relacionado a cada server"""

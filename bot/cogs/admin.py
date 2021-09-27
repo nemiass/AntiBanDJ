@@ -8,11 +8,12 @@ class Admin(commands.Cog):
 
     @commands.command(name="setprefix", aliases=["sp"], description="cambiar prefijo")
     @commands.has_permissions(administrator=True)
+    @commands.guild_only()
     async def set_prefix(self, ctx, prefix) -> None:
-        if len(prefix) == 1:
-            prefixes = h.read_prefixes()
-            prefixes[str(ctx.guild.id)]["prefijo"] = prefix
-            h.save_prefixes(prefixes)
+        prefixes = h.read_prefixes()
+        prefixes[str(ctx.guild.id)]["prefijo"] = prefix
+        h.save_prefixes(prefixes)
+        await ctx.send(f"```json\n{prefixes[str(ctx.guild.id)]}```")
 
 
 def setup(bot):
