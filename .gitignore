@@ -4,5 +4,4 @@ __pycache__
 token.txt
 .idea
 ffmpeg
-configs/config.py
 configs/prefixes.json
