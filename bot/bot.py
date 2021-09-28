@@ -37,7 +37,6 @@ class WaifuDJ(commands.Bot):
 
         target_channel = None
         for channel in channels:
-            print(str(channel))
             if guild.me.permissions_in(channel).send_messages:
                 target_channel = channel
                 break
@@ -76,19 +75,21 @@ class WaifuDJ(commands.Bot):
         else:
             h.save_prefixes(prefixes)
 
-    async def on_command_error(self, ctx, error):
-        if isinstance(error, commands.CommandNotFound):
-            pass
-        elif isinstance(error, commands.MissingPermissions):
-            await ctx.send(f"{ctx.author.name} tu rango es muy bajo para ejecutar este comando")
-        elif isinstance(error, commands.NoPrivateMessage):
-            embed = discord.Embed()
-            embed.set_image(url='https://i.ytimg.com/vi/ibpAeOTIYL0/mqdefault.jpg')
-            await ctx.send(embed=embed)
-        elif isinstance(error, commands.MissingRequiredArgument):
-            embed = discord.Embed(description="El comando requiere argumentos!!")
-            embed.set_image(url='https://i.ytimg.com/vi/ibpAeOTIYL0/mqdefault.jpg')
-            await ctx.send(embed=embed)
+    #async def on_command_error(self, ctx, error):
+    #    if isinstance(error, commands.CommandNotFound):
+    #        pass
+    #    elif isinstance(error, commands.MissingPermissions):
+    #        await ctx.send(f"{ctx.author.name} tu rango es muy bajo para ejecutar este comando")
+    #    elif isinstance(error, commands.NoPrivateMessage):
+    #        embed = discord.Embed()
+    #        embed.set_image(url='https://i.ytimg.com/vi/ibpAeOTIYL0/mqdefault.jpg')
+    #        await ctx.send(embed=embed)
+    #    elif isinstance(error, commands.MissingRequiredArgument):
+    #        embed = discord.Embed(description="El comando requiere argumentos!!")
+    #        embed.set_image(url='https://i.ytimg.com/vi/ibpAeOTIYL0/mqdefault.jpg')
+    #        await ctx.send(embed=embed)
+    #    else:
+    #       print(error)
 
     def load_prefix(self, bot, message) -> None:
         """Cargar el prefijo relacionado a cada server"""
