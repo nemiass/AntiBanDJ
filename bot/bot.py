@@ -75,6 +75,7 @@ class WaifuDJ(commands.Bot):
         else:
             h.save_prefixes(prefixes)
 
+    # handler de errores desactivado
     #async def on_command_error(self, ctx, error):
     #    if isinstance(error, commands.CommandNotFound):
     #        pass
@@ -106,7 +107,7 @@ class WaifuDJ(commands.Bot):
 
     def run(self) -> None:
         self.load_cogs()
-        if TOKEN == "":
-            print("no hay token papi!!!")
-            exit()
-        super().run(TOKEN)
+        if TOKEN:
+            super().run(TOKEN)
+        else:
+            print("no hay token papi")
