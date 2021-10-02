@@ -4,7 +4,10 @@ from configs.config import TOKEN, DEFAULT_PREFIX
 from bot.helpers import helpers as h
 
 # Cogs
-COGS = ["dj", "admin"]
+COGS = [
+    "dj",
+    "admin"
+]
 
 
 class WaifuDJ(commands.Bot):
@@ -14,9 +17,9 @@ class WaifuDJ(commands.Bot):
     async def on_ready(self) -> None:
         await self.change_presence(
             status=discord.Status.idle,
-            activity=discord.Activity(type=discord.ActivityType.listening, name="bot versión beta")
+            activity=discord.Activity(type=discord.ActivityType.listening, name="a Bad Bunny")
         )
-        print("The bot is online")
+        print(f"the {WaifuDJ.__name__} bot is onlinne")
 
     async def on_guild_join(self, guild) -> None:
         """
@@ -110,4 +113,4 @@ class WaifuDJ(commands.Bot):
         if TOKEN:
             super().run(TOKEN)
         else:
-            print("no hay token papi")
+            print("no hay token papi!")

@@ -22,6 +22,7 @@ class Player:
         self.channel = ctx.channel
         # la clase cog
         self.cog_dj = ctx.cog
+        # para guardar el mensaje
         self.np = None
 
         self.queue = Queue()
@@ -136,7 +137,6 @@ class DJ(commands.Cog):
         if (song_url := song[0] if h.is_url(song) else h.url_by_name(song)) is None:
             await ctx.send("no se econtró tu chiste", delete_after=5)
             return
-
         player = self.get_player(ctx)
         music_info = await player.get_ifo_music(song_url, self.bot.loop)
         print(music_info)
